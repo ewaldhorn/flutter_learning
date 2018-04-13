@@ -29,11 +29,16 @@ class RandomWordsState extends State<RandomWords> {
         appBar: new AppBar(
           title: new Text('Startup Name Generator'),
           actions: <Widget>[
-            new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved)
+            new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved),
+            new IconButton(
+                icon: new Icon(Icons.keyboard),
+                onPressed: _navigateToTypingWindow)
           ],
         ),
         body: _buildSuggestions());
   }
+
+  void _navigateToTypingWindow() {}
 
   void _pushSaved() {
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
