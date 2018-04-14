@@ -28,4 +28,12 @@ main() {
       print("Dunno, it's not 1..7!");
   }
 
+  if (number % 2 == 0 && number > 10) {
+    print("This is a number greater than 10 that's even.");
+  } else if (number % 2 == 0 && number < 10) {
+    print("This is an even number smaller than 10");
+  } else {
+    print("We don't care about this number!");
+  }
+
 }
