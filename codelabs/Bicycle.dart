@@ -8,7 +8,7 @@ class Bicycle {
   Bicycle(this.cadence, this._speed, this.gear);
 
   @override
-  String toString() => 'Bicycle: $_speed mph';
+  String toString() => "Bicycle: $_speed mph";
 
   void applyBrake(int decrement) {
     _speed -= decrement;
