@@ -3,8 +3,8 @@ String scream(int length) {
 }
 
 main() {
-  var values = [1,2,3,5,10,50];
-  
+  var values = [1, 2, 3, 5, 10, 50];
+
   // imperative (non-functional)
   print("Imperative mode:");
   for (var length in values) {
