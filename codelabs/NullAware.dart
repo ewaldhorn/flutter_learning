@@ -20,5 +20,5 @@ main() {
 
   var len = name?.length;
 
-  print("The string is $len long");
+  print("The string is ${len ?? 0} character(s) long");
 }
