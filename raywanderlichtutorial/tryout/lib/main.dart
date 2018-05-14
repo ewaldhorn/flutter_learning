@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'strings.dart';
 
 /*
  * Loosely following the Ray Wenderlich tutorial at : https://www.raywenderlich.com/188257/getting-started-with-flutter
@@ -10,15 +11,25 @@ class LearningFlutterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Learning',
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Learning Flutter'),
-        ),
-        body: new Center(
-          child: new Text('Flutter Sample Text'),
-        ),
+      title: Strings.appTitle,
+      home: new MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  createState() => new MyWidgetState();
+}
+
+class MyWidgetState extends State<MyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(Strings.appTitle),
       ),
+      body: new Text('This is my widget!'),
     );
   }
 }
