@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'strings.dart';
+import 'member.dart';
 
 /*
  * Loosely following the Ray Wenderlich tutorial at : https://www.raywenderlich.com/188257/getting-started-with-flutter
@@ -35,7 +36,7 @@ class MyWidgetState extends State<MyWidget> {
       final membersJSON = JSON.decode(response.body);
 
       for (var memberJSON in membersJSON) {
-        final member = new Member(memberJSON["login"]);
+        final member = new Member(memberJSON["login"], memberJSON["avatar_url"]);
         _members.add(member);
       }
     });
@@ -52,7 +53,13 @@ class MyWidgetState extends State<MyWidget> {
     return new Padding(
         padding: const EdgeInsets.all(16.0),
         child: new ListTile(
-            title: new Text("${_members[i].login}", style: _biggerFont)));
+            title: new Text("${_members[i].login}", style: _biggerFont),
+            leading: new CircleAvatar(
+              backgroundColor: Colors.green,
+              backgroundImage: new NetworkImage(_members[i].avatarUrl),
+            ),
+            )
+            );
   }
 
   @override
@@ -72,16 +79,5 @@ class MyWidgetState extends State<MyWidget> {
         },
       ),
     );
-  }
-}
-
-class Member {
-  final String login;
-
-  Member(this.login) {
-    if (login == null) {
-      throw new ArgumentError(
-          "login of Member cannot be null. Received: '$login'");
-    }
   }
 }
