@@ -25,14 +25,19 @@ class MyWidget extends StatefulWidget {
 }
 
 class MyWidgetState extends State<MyWidget> {
-  var _members = [];
+  var _members = <Member>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   _loadData() async {
     String dataURL = "https://api.github.com/orgs/raywenderlich/members";
     http.Response response = await http.get(dataURL);
     setState(() {
-      _members = JSON.decode(response.body);
+      final membersJSON = JSON.decode(response.body);
+
+      for (var memberJSON in membersJSON) {
+        final member = new Member(memberJSON["login"]);
+        _members.add(member);
+      }
     });
   }
 
@@ -45,10 +50,9 @@ class MyWidgetState extends State<MyWidget> {
 
   Widget _buildRow(int i) {
     return new Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: new ListTile(
-        title: new Text("${_members[i]["login"]}", style: _biggerFont))
-    );
+        padding: const EdgeInsets.all(16.0),
+        child: new ListTile(
+            title: new Text("${_members[i].login}", style: _biggerFont)));
   }
 
   @override
@@ -68,5 +72,16 @@ class MyWidgetState extends State<MyWidget> {
         },
       ),
     );
+  }
+}
+
+class Member {
+  final String login;
+
+  Member(this.login) {
+    if (login == null) {
+      throw new ArgumentError(
+          "login of Member cannot be null. Received: '$login'");
+    }
   }
 }
